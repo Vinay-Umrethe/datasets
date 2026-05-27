@@ -7,9 +7,11 @@ from huggingface_hub.utils import insecure_hashlib
 from .arrow import arrow
 from .audiofolder import audiofolder
 from .cache import cache
+from .conll import conll
 from .csv import csv
 from .eval import eval
 from .hdf5 import hdf5
+from .iceberg import iceberg
 from .imagefolder import imagefolder
 from .json import json
 from .lance import lance
@@ -46,6 +48,7 @@ _PACKAGED_DATASETS_MODULES = {
     "parquet": (parquet.__name__, _hash_python_lines(inspect.getsource(parquet).splitlines())),
     "arrow": (arrow.__name__, _hash_python_lines(inspect.getsource(arrow).splitlines())),
     "text": (text.__name__, _hash_python_lines(inspect.getsource(text).splitlines())),
+    "conll": (conll.__name__, _hash_python_lines(inspect.getsource(conll).splitlines())),
     "imagefolder": (imagefolder.__name__, _hash_python_lines(inspect.getsource(imagefolder).splitlines())),
     "audiofolder": (audiofolder.__name__, _hash_python_lines(inspect.getsource(audiofolder).splitlines())),
     "videofolder": (videofolder.__name__, _hash_python_lines(inspect.getsource(videofolder).splitlines())),
@@ -57,6 +60,7 @@ _PACKAGED_DATASETS_MODULES = {
     "hdf5": (hdf5.__name__, _hash_python_lines(inspect.getsource(hdf5).splitlines())),
     "eval": (eval.__name__, _hash_python_lines(inspect.getsource(eval).splitlines())),
     "lance": (lance.__name__, _hash_python_lines(inspect.getsource(lance).splitlines())),
+    "iceberg": (iceberg.__name__, _hash_python_lines(inspect.getsource(iceberg).splitlines())),
 }
 
 # get importable module names and hash for caching
@@ -84,6 +88,8 @@ _EXTENSION_TO_MODULE: dict[str, tuple[str, dict]] = {
     ".gpq": ("parquet", {}),
     ".arrow": ("arrow", {}),
     ".txt": ("text", {}),
+    ".conll": ("conll", {}),
+    ".conllu": ("conll", {"comment_prefix": "#"}),
     ".tar": ("webdataset", {}),
     ".xml": ("xml", {}),
     ".hdf5": ("hdf5", {}),
